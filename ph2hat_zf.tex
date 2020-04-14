@@ -1,0 +1,478 @@
+\documentclass[a4paper, twocolumn]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+% \usepackage{bm}
+
+\numberwithin{equation}{section}
+
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{booktabs}
+
+\usepackage[margin=2cm]{geometry}
+
+\usepackage{siunitx}
+
+\usepackage{xcolor}
+\usepackage[colorlinks = true,
+            linkcolor = red!50!black,
+            urlcolor  = blue,
+            citecolor = black,
+            anchorcolor = blue]{hyperref}
+
+\usepackage{polyglossia}
+\setmainlanguage{german}
+
+ 
+\newtheoremstyle{hsr-def}%
+    {1em}% above
+    {1em}% below
+    {}% body
+    {0pt}% indent
+    {}% headfont
+    { }% headpunkt
+    { }% headspace
+    {\textsc{\thmname{#1} \thmnumber{#2}.} \textbf{\thmnote{#3}}}% headspec
+
+\newtheoremstyle{hsr-sub}%
+    {1em}% above
+    {1em}% below
+    {}% body
+    {0pt}% indent
+    {}% headfont
+    { }% headpunkt
+    { }% headspace
+    {\textsl{\thmname{#1} \thmnumber{#2}.} \textbf{\thmnote{#3}}}% headspec
+    
+\newtheoremstyle{hsr-unnum}%
+    {1em}% above
+    {1em}% below
+    {}% body
+    {0pt}% indent
+    {}% headfont
+    { }% headpunkt
+    { }% headspace
+    {\textsc{\thmname{#1}} \textbf{\thmnote{#3}}}% headspec
+
+\theoremstyle{hsr-def}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{hsr-sub}
+\newtheorem{result}{Folgerung}[definition]
+\newtheorem{example}{Beispiel}[definition]
+
+\theoremstyle{hsr-unnum}
+\newtheorem{remark}{Bemerkung}[definition]
+
+
+\newcommand{\dd}[1]{\ensuremath{\mathrm{d}#1}}
+\newcommand{\di}[1]{\,\dd{#1}}
+\newcommand{\deriv}[2]{\ensuremath{\frac{\dd{#1}}{\dd{#2}}}}
+\newcommand{\pderiv}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\uvec}[1]{\ensuremath{\vec{\hat{#1}}}}
+
+\newcommand{\unitsof}[1]{\ensuremath{\left[\,#1\,\right]}}
+
+
+
+\begin{document}
+\section{Einf\"uhrung}
+
+\begin{definition}[Fluid]
+Fl\"ussigkeiten und Gase werden under dem Oberbegriff \emph{Fluide} zusammengefasst.
+\end{definition}
+
+% \begin{description}
+%     \item[Isotherm]
+%     \item[Isobar]
+%     \item[Isotrop]
+% \end{description}
+
+
+\begin{definition}[Druck und Schubspannung]
+F\"ur einfache F\"alle der Cauchy Spannugstensor kann zu zwei Skalare \(p\) und \(\tau\) vereinfacht werden, sie werden Dr\"uck bzw. Schubspannung genannt.
+\begin{align*}
+    pA
+    &= \vec{F}\cdot\uvec{n}
+    = F_\perp
+    &
+    \tau A
+    &= \vec{F}\cdot\uvec{T}
+    = F_\parallel
+    \stackrel{\text{statik}}{=} 0
+    \\
+    \unitsof{p} &= \si{\newton\per\square\metre} = \si{\pascal} 
+\end{align*}
+
+\begin{result}[Gesetzt von Pascal]
+In ruhenden Fluiden \(\tau = 0\), somit ist die Kraft immer senkrecht.
+\end{result}
+\end{definition}
+
+\begin{definition}[Dichte] Ist die Masse pro Volumeneinheit.
+\[
+    \varrho = \frac{m}{V} \qquad \unitsof{\varrho} = \si{\kilo\gram\per\cubic\metre}
+\]
+\end{definition}
+
+\section{Hydrostatik}
+
+\begin{definition}[Schweredruck]
+\begin{equation} \label{eqn:hydrostatic-pressure}
+    \dd{p} = \varrho \vec{g} \cdot \dd{\vec{y}} = - \varrho g \dd{y}
+\end{equation}
+
+\begin{result}[Hydrostatischer Druck]
+F\"ur Fl\"ussigkeiten, da die Dichte konstant ist folgt:
+\[
+    p = \varrho g h
+\]
+\end{result}
+
+\begin{result}[Schweredruck eines Gase]
+Angenommen dass, die Dichte nur von Druck abh\"angt (barotrop)
+\[
+    \varrho(p) = \varrho_0 \frac{p}{p_0}
+\]
+Die L\"osung von \eqref{eqn:hydrostatic-pressure} ergibt die \emph{Barometrische H\"ohenformel} f\"ur eine isotherme Atmosp\"are.
+\[
+    p(h) = p_0 \exp\left(-\frac{\varrho_0}{p_0} gh\right)
+\]
+\end{result}
+\end{definition}
+
+\begin{definition}[Gesetz von Boyle-Mariotte]
+% \label{def:boyle-mariotte}
+F\"ur ein ideales Gas gilt bei konstanter Temperatur
+\[
+    pV = (\text{konstant})
+\]
+
+\begin{result}
+Die Dichte ist proportional zum Druck
+\[
+    \frac{V_2}{V_1} = \frac{p_1}{p_2} = \frac{\varrho_1}{\varrho_2}
+\]
+\end{result}
+\end{definition}
+
+
+\begin{definition}[Kompressibilit\"at]
+Die Druckerh\"ohung \(\Delta p\) bewirkt in einem Fluid stets eine Volumenabname.
+Die relative Volumen\"anderung ist proportional zur Druck\"anderung
+\[
+    \Delta V / V = - \kappa \Delta p
+\]
+
+\begin{remark}
+    Eine ideale Fl\"ussigkeit ist reibungsfrei und inkompressibel.
+\end{remark}
+
+\begin{remark}
+    In einer idealen Fl\"ussigkeit ist die Dichte konstant.
+\end{remark}
+\end{definition}
+
+\begin{definition}[Statische Auftriebskraft] Auch als Archimedische Prinzip bekannt.
+\[
+    F_A = G_f = \varrho_f  V_k g
+    \qquad
+    \uvec{F}_a = - \uvec{g}
+\]
+Der auftrieb eines in ein Fluid eingetauchen K\"orper ist gleich dem Gewicht des von ihm verdr\"angten Fluids.
+\end{definition}
+
+\subsection{Grenzfl\"acheneffekte}
+
+\begin{definition}[Oberfl\"achenspannung]
+Zwischen zwei Atomen oder Molek\"ulen tritt die \emph{Van der Waals}-Kraft.
+An der Oberfl\"ache der Fl\"ussigkeit ist der mittlere Abstand der Molek\"ule etwas gr\"osser als im Innern. Das bewirkt eine Parallel zur Oberfl\"ache gerichtete anzihende Kraft zwischen den Molek\"ulen.
+\[
+    \sigma = \frac{F}{\ell}
+    \qquad
+    \unitsof{\sigma} = \si{\newton\per\metre}
+\]
+\begin{remark}
+Die Oberfl\"achenspannung kann auch als \emph{spezifische Oberf\"achenenergie} bezeichnet werden.
+\[
+    \sigma
+    = \frac{\Delta W}{\Delta A} 
+    = \frac{F\Delta s}{\ell \Delta s}
+    = \frac{F}{\ell}
+\]
+Die \emph{Oberfl\"achenenergie} ist ein Ma{\ss} f\"ur die Energie, die zum Aufbrechen der chemischen Bindungen notwendig ist, wenn eine neue Oberfl\"ache einer Fl\"ussigkeit oder eines Festkörpers erzeugt wird.
+\end{remark}
+
+\begin{result}[Grenzfl\"achenspannung]
+Bei einer Vergr\"osserung der Grenzfl\"ache muss Arbeit geleistet werden, da die Grenzfl\"achenenergie vergr\"ossert wird.
+Es gibt dann auch die Grenzfl\"achenspannungen 
+\(
+    \sigma_\text{sl},
+    \sigma_\text{sg},
+    \sigma_\text{lg}
+\) (fl\"ussig = liquid, fest = solid, gas) die zwischen Festk\"orper und Fl\"ussigkeit wirken. \(\varphi\) ist dann der \emph{Kontaktwinkel}, und die Geometrie ergibt die Beziehung
+\[
+    \sigma_\text{sg} = \sigma_\text{sl} + \sigma_\text{lg} \cos \varphi
+\]
+\end{result}
+
+\begin{example}[Druck in Seifenblase]
+\[
+    p = \frac{2\sigma}{r}
+\]
+\end{example}
+\end{definition}
+
+\begin{definition}[Kapillarit\"at]
+Allgemein an die Grenze gilt:
+\[
+    F_\text{Oberfl\"ache} = F_{G,\text{Fl\"ussigkeit}}
+\]
+\begin{example}[In einem Rohr (Zylinder)]
+\[
+    2\pi r\sigma = \varrho\pi r^2 hg \implies  h = \frac{2\sigma}{\varrho g r}
+\]
+\end{example}
+\end{definition}
+
+\section{Hydrodynamik}
+\subsection{Einf\"uhrung}
+\begin{definition}[Kontinuit\"atsgleichung]
+\begin{equation} \label{eqn:continuity}
+    \pderiv{}{t}\int_V \varrho \di{V} 
+    = \oint_{\partial V} \varrho \vec{v}\cdot\di{\vec{s}}
+\end{equation}
+
+\begin{result}[Ideales Fluid]
+Da die Dichte konstant ist (inkompressibel), man kann \eqref{eqn:continuity} durch \(\varrho\) teilen und folgt:
+\[
+    \dot{V} = \int_A \vec{v}\cdot\di{\vec{s}} = vA
+    \qquad
+    \unitsof{\dot{V}} = \si{\cubic\metre\per\second}
+\]
+\end{result}
+
+% \begin{remark}[Differentialform]
+% \[
+%     \nabla \cdot (\varrho \vec{v}) + \pderiv{\varrho}{t} = 0
+% \]
+% \end{remark}
+\end{definition}
+
+\begin{definition}[Bernoulli Gleichung]
+Der Term \(\varrho v^2 / 2\) wird \emph{dynamische Druck} genannt.
+\[
+    p + \varrho g h + \frac{\varrho}{2} v^2 = (\text{Konstant})
+\]
+
+\begin{remark}
+Bernoulli gilt f\"ur inkompressible Fluide, und gen\"ugt f\"ur Fl\"ussigkeite und Gase, sofern \(v \ll \) Schallgeschwidigkeit.
+\end{remark}
+
+\begin{result}
+\begin{gather*}
+    p_1 + \varrho g h_1 + \frac{\varrho}{2} v_1^2
+    =
+    p_2 + \varrho g h_2 + \frac{\varrho}{2} v_1^2
+    \\
+    \text{oder}\quad -\Delta p = \varrho g \Delta h + \frac{\varrho}{2} \Delta \left( v^2 \right)
+\end{gather*}
+\end{result}
+
+\begin{result}
+Wo die Geschwindigkeit am schnellsten ist, dort ist die Druck am tiefsten.
+\end{result}
+
+\end{definition}
+
+\subsection{Reale Str\"omungen}
+
+\begin{definition}[Newtonsche Reibungsgesetz]
+Die Proportionalit\"atskonstante \(\eta\) wird \emph{dynamische Viskosit\"at} oder \emph{Z\"ahingkeit} genannt.
+\begin{gather*}
+    \tau = \eta \deriv{v}{z}
+    \stackrel{!}{=} \frac{F_\parallel}{A}  \\
+    \unitsof{\eta}  
+    = \si{\kilo\gram\per\metre\second}
+    = \si{\newton\second\per\metre}
+    = \si{\pascal\second}
+\end{gather*}
+\end{definition}
+
+\begin{definition}[Formel von Stokes]
+(Stokes'sche Reibung) Reibungskraft einer Kugel im \"Ol 
+\[
+    F_R = 6\pi\eta Rv_0
+\]
+\end{definition}
+
+\begin{definition}[Laminare Rohrstr\"omung]
+Lauten die Gleichgewichtsbedingungen f\"ur die Kr\"afte innerhalb des Zylinders.
+\begin{align*}
+    F_\text{Res,Druck} - F_\text{Reib} & = 0 \\
+    \pi r^2 (p_1 - p_2) - 2\pi rl\tau &= 0
+\end{align*}
+
+\begin{result}[Geschwindigkeitsverteilung] 
+Innerhalb des Zylinders (\(r\) von \(0\) bis \(R\))
+\[
+    v(r) = \frac{\Delta p}{4\eta\ell}\left(R^2-r^2\right)
+\]
+\end{result}
+
+\begin{result}[Gesetz von Hagen Poiseuille]
+\[
+    \dot{V} = \frac{\pi\Delta p R^4}{8\eta\ell}
+\]
+\end{result}
+
+\begin{remark}
+Bei einer Zunahme des Rohrradius wird nicht nur die zur Verf\"ugung stehende Querschnittsfl\"ache gr\"osser, sondern zugleich w\"achst in der Rohrmitte auch die maximale Geschwindigkeit.
+\end{remark}
+\end{definition}
+
+\subsection{Turbulente Str\"omung}
+
+\begin{definition}[Reynolds Zahl]
+Ist ein dimensionslose Koeffizient aus der \emph{Navier-Stokes} Gleichung, der das Verh\"altnis zwischen kinetischer Energie des Fluides und dessen innerer Reibung (proportional zur Viskosit\"at) beschreibt.
+\[
+    \mathcal{R} = \frac{E_k}{E_r} = \frac{\varrho}{\eta} v^*\ell^*
+    %\frac{\Delta p}{\tau}
+\]
+\(v^*, \ell^*\) sind eine charakteristische L\"ange bzw. Geschwindigkeit. Sie sind dimensionslose Variablen f\"ur geometrische und physikalische Gr\"ossen.
+
+\begin{result}[Rohrstr\"omung]
+Wird bei der Str\"omung durch ein Rohr mit kreisf\"ormigem Querschnitt der Durchmesser \(d\) als charakteristische Abmessung gew\"ahlt, sot ist die Reynolds-Zahl
+\[
+    \mathcal{R} = \frac{\varrho v d}{\eta}
+\]
+\end{result}
+
+\begin{result}[Kritische \(\mathcal{R}\)]
+
+\end{result}
+\end{definition}
+
+\begin{definition}[Druckwiederstand]
+\end{definition}
+
+
+Druckdifferenz
+\[
+    \Delta p \propto \varrho \Delta v \cdot \bar{v}
+\]
+
+Schubspannung
+\[
+    \tau \propto \eta\frac{\Delta V}{\ell}
+\]
+
+
+Prandtl'sche Genzschicht
+\[
+    D = \sqrt{\frac{\eta\ell}{\varrho v}}
+\]
+
+Druckabfall laminar
+\[
+    \Delta p = 32\eta\ell \frac{v}{d^2}
+\]
+
+\(\lambda\) nach Blasius, \emph{turulent}
+\[
+    \lambda_\text{t} = \frac{0.316}{\sqrt[4]{\mathcal{R}}}
+\]
+
+\(\lambda\) nach Hagen-Poiseuille, \emph{laminar}
+\[
+    \lambda_\text{l} = \frac{64}{\mathcal{R}}
+\]
+
+Turbulente Rohrst\"omung, je nach turbulent oder laminares \(\lambda\) 
+\[
+    \Delta p = \lambda \frac{\varrho\ell}{2d} v^2
+\]
+
+\section*{Kapitel 6}
+Druckwiederstand
+\[
+    F_D = c_W \frac{\varrho}{2}v^2 A_\perp
+\]
+
+Auftriebskraft nach Kutta-Jukowski
+\[
+    F_A = \varrho v \ell \Gamma
+\]
+
+Zirkulation
+\[
+    \Gamma = \oint \vec{v} \di{\vec{l}}
+\]
+
+Induzierter Widerstand
+\[
+    F_W = \dot{c}_W \frac{\varrho}{2} v^2 A_\parallel
+\]
+
+Dynamischer Auftrieb
+\[
+    F_A = c_A \frac{\varrho}{2} v^2 A_\perp
+\]
+
+Gleitwinkel
+\[
+    \tan(\varphi) = \frac{F_W}{F_A} = \frac{c_W}{c_A} = \frac{v_V}{v_H}
+\]
+
+\begin{thebibliography}{2}
+\bibitem{hsr}
+	\textsc{Hochschule f\"ur Technik Rapperswil (HSR)}.
+    \textit{\texttt{Ph2HAT} Vorlesungen und die dazugeh\"orige Unterlagen,}
+	Sourlier David,
+	Fr\"uhlingssemester 2020,
+	Rapperswil.
+
+\bibitem{bucher-ruh}
+	\textsc{Arthur Ruh, Benno Bucher}.
+	\textit{Physik 1: Mechanik, Fluide, W\"armelehre}.
+	Vol I, HSR, 2014, Rapperswil.
+
+\bibitem{feynman1}
+	\textsc{Richard Feynman}.
+	\textit{Mainly Mechanics, radiation, and heat}.
+	\textit{The Feynman Lectures on Physics},
+	Leighton, Sands,
+	New Millenium Edition,
+	Vol I,
+	Basic Books,
+	California Institute of Technology (Caltech).
+
+\bibitem{feynman2}
+	\textsc{Richard Feynman}.
+	\textit{Mainly electromagnetism and matter}.
+	\textit{The Feynman Lectures on Physics},
+	Leighton, Sands,
+	New Millenium Edition,
+	Vol II,
+	Basic Books,
+	California Institute of Technology (Caltech).
+	
+\end{thebibliography}
+
+
+\section*{License}
+{ \tt
+Ph2HAT-ZF (c) by Naoki Pross
+\\\\
+Ph2HAT-ZF is licensed under a Creative Commons Attribution-ShareAlike 4.0 Unported License.
+\\\\
+You should have received a copy of the license along with this work. If not, see 
+\\\\
+{\small\url{http://creativecommons.org/licenses/by-sa/4.0/}}
+}
+
+\end{document}
