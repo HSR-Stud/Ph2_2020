@@ -80,7 +80,7 @@
 
 
 \begin{document}
-\section{Einf\"uhrung}
+\section{Fluide Einf\"uhrung}
 
 \begin{definition}[Fluid]
 Fl\"ussigkeiten und Gase werden under dem Oberbegriff \emph{Fluide} zusammengefasst.
@@ -426,6 +426,137 @@ Dynamischer Auftrieb
 Gleitwinkel
 \[
     \tan(\varphi) = \frac{F_W}{F_A} = \frac{c_W}{c_A} = \frac{v_V}{v_H}
+\]
+
+\section*{Kapitel 7}
+Absolute Temperatur
+\[
+    T = \vartheta + \SI{273.15}{\kelvin} = \vartheta - \vartheta_0
+\]
+
+Stoffmenge
+\[
+    \SI{1}{\mole} = N_A \text{ Molek\"ule} = \SI{6.022e23}{\per\mole}
+\]
+
+Ausdehnung
+\begin{align*}
+    \Delta \ell &= \alpha\ell\Delta T \\
+    \Delta A &= \beta A \Delta T & \beta \approx 2\alpha \\
+    \Delta V &= \gamma V \Delta T & \gamma \approx 3\alpha
+\end{align*}
+
+Termische Spannung
+\[
+    \sigma = E \alpha \Delta T
+\]
+
+\section*{Kapitel 8}
+Universelle Gasgleichung f\"ur ideale Gase
+\[
+    pV = nRT = N_A k T = \text{ (konstant)}
+\]
+\[
+    \frac{p_1 V_1}{T_1} = \frac{p_2 V_2}{T_2}
+\]
+
+Molzahl
+\[
+    n = \frac{m}{M} = \frac{N}{N_A}
+\]
+
+Dichte eines Gases
+\[
+    \rho = \frac{m}{V} = \frac{M}{V_m} = \frac{pM}{RT}
+\]
+
+\section*{Kapitel 9}
+Gesetz von Dalton
+\[
+    p = \sum_{i = 1}^n p_i
+\]
+
+Volumen-Konzentration
+\[
+    q_i = \frac{V_i}{V}
+\]
+\[
+    q_i = \frac{n_i}{n}
+\]
+
+Massen-Konzentration
+\[
+    \mu_i = \frac{m_i}{m}
+\]
+\[
+    \mu_i = \frac{M_i}{M} q_i
+\]
+
+Mol-Masse eines Gas-Gemischs
+\[
+    M = \sum_{i = 1}^n q_i M_i
+\]
+
+\subsection*{Reales Gas}
+Van der Waals-Korrektur
+\[
+    p'V_m' = nRT
+    \qquad
+    p' = p + \frac{a}{V_m^2}
+    \quad
+    V_m' = V_m - b
+\]
+
+Van der Waals-Gleichung
+\[
+    \left(p + \frac{n^2 a}{V^2} \right)(V - nb) = nRT
+\]
+
+Van der Waals-Parameter
+\[
+    a = \frac{9}{8} R T_k V_{mk}
+    \qquad
+    b = \frac{V_{mk}}{3}
+\]
+
+Kritische Gr\"ossen
+\[
+    V_{mk} = 3b
+    \qquad
+    T_k = \frac{8a}{27Rb}
+    \qquad
+    p_k = \frac{a}{27b^2}
+\]
+
+\section*{Kapitel 10}
+\"Anderung innere Energie
+\[
+    \Delta U = \Delta W + \Delta Q
+\]
+
+Mechanische Arbeit von einem Gas
+\[
+    \Delta W = p \Delta V
+\]
+
+Schmelz-/Erstarrungs-W\"arme
+\[
+    Q_f = q_f m
+\]
+
+Verdampfungs-/Kondensations-W\"arme
+\[
+    Q_s = q_s m
+\]
+
+W\"armekapazit\"at
+\[
+    Q = cm\Delta T = n C_m \Delta T = C \Delta T
+\]
+
+W\"arme-Bilanz
+\[
+    0 = \sum_{i = 1}^n \Delta Q_i + \Delta Q_{f_i} + \Delta Q_{s_i}
 \]
 
 \begin{thebibliography}{2}
