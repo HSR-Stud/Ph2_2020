@@ -7,6 +7,7 @@
 
 \numberwithin{equation}{section}
 
+\usepackage{float}
 \usepackage{array}
 \usepackage{parskip}
 \usepackage{booktabs}
@@ -14,6 +15,22 @@
 \usepackage[margin=2cm]{geometry}
 
 \usepackage{siunitx}
+% horrible units for fluiddynamics
+\DeclareSIUnit{\kilopond}{kp}
+
+\DeclareSIUnit{\at}{at}
+\DeclareSIUnit{\ata}{ata}
+\DeclareSIUnit{\atu}{at\"u}
+\DeclareSIUnit{\atm}{atm}
+
+\DeclareSIUnit{\torr}{Torr}
+
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
 
 \usepackage{xcolor}
 \usepackage[colorlinks = true,
@@ -63,7 +80,7 @@
 \newtheorem{result}{Folgerung}[definition]
 \newtheorem{example}{Beispiel}[definition]
 
-\theoremstyle{hsr-unnum}
+% \theoremstyle{hsr-unnum}
 \newtheorem{remark}{Bemerkung}[definition]
 
 
@@ -111,6 +128,27 @@ F\"ur einfache F\"alle der Cauchy Spannugstensor kann zu zwei Skalare \(p\) und 
 \begin{result}[Gesetzt von Pascal]
 In ruhenden Fluiden \(\tau = 0\), somit ist die Kraft immer senkrecht.
 \end{result}
+
+\begin{table}[h] \centering
+\begin{tabular}{p{.3\linewidth} >{\(}l<{\)}}
+    \toprule
+    Name & \text{Einheit} \\
+    \midrule
+    Kilopond & \SI{1}{\kilopond} = g\,\si{\newton} \approx \SI{9.81}{\newton} \\
+    Technische\newline Atmosph\"are & \begin{aligned}
+        \SI{1}{\at} &= \SI{1}{\kilopond\per\square\centi\metre} \\
+        &\approx \SI{0.98}{\bar}
+    \end{aligned} \\
+    Physikalische\newline Atmosph\"are & \SI{1}{\atm} = \SI{101325}{\pascal} \\
+    Torr & \SI{1}{\torr} = \SI{1/760}{\atm} \\
+    Bar & \begin{aligned}
+        \SI{1}{\bar} &= \SI{1e5}{\pascal}\\
+        &\approx \SI{750}{\torr}
+    \end{aligned} \\
+    \bottomrule
+\end{tabular}
+\caption{Einheiten des Drucks}
+\end{table}
 \end{definition}
 
 \begin{definition}[Dichte] Ist die Masse pro Volumeneinheit.
@@ -232,11 +270,11 @@ Allgemein an die Grenze gilt:
 \[
     F_\text{Oberfl\"ache} = F_{G,\text{Fl\"ussigkeit}}
 \]
-\begin{example}[In einem Rohr (Zylinder)]
+\begin{result}[In einem Rohr (Zylinder)]
 \[
     2\pi r\sigma = \varrho\pi r^2 hg \implies  h = \frac{2\sigma}{\varrho g r}
 \]
-\end{example}
+\end{result}
 \end{definition}
 
 \section{Hydrodynamik}
@@ -325,14 +363,32 @@ Innerhalb des Zylinders (\(r\) von \(0\) bis \(R\))
 \end{result}
 
 \begin{result}[Gesetz von Hagen Poiseuille]
-\[
+\begin{equation} \label{eqn:hagen-poiseuille}
     \dot{V} = \frac{\pi\Delta p R^4}{8\eta\ell}
+\end{equation}
+\end{result}
+
+\begin{result}[Druckabfall]
+Wenn man in \eqref{eqn:hagen-poiseuille} \(\dot{V} = \pi R^2 v\) einsetzt, folgt:
+\[
+    \Delta p = 32\eta\ell \frac{v}{d^2}
 \]
 \end{result}
 
 \begin{remark}
 Bei einer Zunahme des Rohrradius wird nicht nur die zur Verf\"ugung stehende Querschnittsfl\"ache gr\"osser, sondern zugleich w\"achst in der Rohrmitte auch die maximale Geschwindigkeit.
 \end{remark}
+\end{definition}
+
+\begin{definition}[Prandtl'sche Grenzschicht]
+\(h\) ist die h\"ohe der Schicht in unmittelbarer N\"ahe einer Oberfl\"ache \(A = \ell b\) an ein Fluid, der vorbeistr\"omt, mitgezogen wird.
+\[
+    h = \frac{\ell}{\sqrt{\mathcal{R}}} =  \sqrt{\frac{\eta\ell}{\varrho v}}
+\]
+\begin{figure}[h] \centering
+\input{fig/prandtl-boundary.tex}
+\caption{Laminare Grenzschicht f\"ur eine Plattenstr\"omung}
+\end{figure}
 \end{definition}
 
 \subsection{Turbulente Str\"omung}
@@ -352,70 +408,56 @@ Wird bei der Str\"omung durch ein Rohr mit kreisf\"ormigem Querschnitt der Durch
 \]
 \end{result}
 
-\begin{result}[Kritische \(\mathcal{R}\)]
-
-\end{result}
 \end{definition}
 
-\begin{definition}[Druckwiederstand]
+\begin{definition}[Kritische Reynoldszahl \(\mathcal{R}_k\)]
+
 \end{definition}
 
-
-Druckdifferenz
-\[
-    \Delta p \propto \varrho \Delta v \cdot \bar{v}
-\]
-
-Schubspannung
-\[
-    \tau \propto \eta\frac{\Delta V}{\ell}
-\]
-
-
-Prandtl'sche Genzschicht
-\[
-    D = \sqrt{\frac{\eta\ell}{\varrho v}}
-\]
-
-Druckabfall laminar
-\[
-    \Delta p = 32\eta\ell \frac{v}{d^2}
-\]
-
-\(\lambda\) nach Blasius, \emph{turulent}
-\[
-    \lambda_\text{t} = \frac{0.316}{\sqrt[4]{\mathcal{R}}}
-\]
-
-\(\lambda\) nach Hagen-Poiseuille, \emph{laminar}
-\[
-    \lambda_\text{l} = \frac{64}{\mathcal{R}}
-\]
-
+\begin{definition}[Reale Rohrstr\"omung]
 Turbulente Rohrst\"omung, je nach turbulent oder laminares \(\lambda\) 
 \[
     \Delta p = \lambda \frac{\varrho\ell}{2d} v^2
 \]
 
-\section*{Kapitel 6}
-Druckwiederstand
+\begin{example}[Turbulente \(\lambda\) nach Blasius]
 \[
-    F_D = c_W \frac{\varrho}{2}v^2 A_\perp
+    \lambda_\text{t} = \frac{0.316}{\sqrt[4]{\mathcal{R}}}
 \]
+\end{example}
 
-Auftriebskraft nach Kutta-Jukowski
+\begin{example}[Laminare \(\lambda\) nach Hagen-Poiseuille]
+Das ist tats\"achlich \eqref{eqn:hagen-poiseuille} umformuliert.
+\[
+    \lambda_\text{l} = \frac{64}{\mathcal{R}}
+\]
+\end{example}
+\end{definition}
+
+\subsection{Dynamischer Auftrieb}
+\begin{definition}[Auftriebskraft nach Kutta-Jukowski] Dieser Auftrieb ist eine Folgerung vom \emph{Magnus Effekt}.
 \[
     F_A = \varrho v \ell \Gamma
 \]
+\end{definition}
 
-Zirkulation
+\begin{definition}[Druckwiederstand]
+\[
+    F_D = c_W \frac{\varrho}{2}v^2 A_\perp
+\]
+\end{definition}
+
+\begin{definition}[Zirkulation]
 \[
     \Gamma = \oint \vec{v} \di{\vec{l}}
 \]
+\end{definition}
+
+\subsection{Tragfl\"ugel}
 
 Induzierter Widerstand
 \[
-    F_W = \dot{c}_W \frac{\varrho}{2} v^2 A_\parallel
+    F_W = c_W^* \frac{\varrho}{2} v^2 A_\parallel
 \]
 
 Dynamischer Auftrieb
@@ -428,47 +470,69 @@ Gleitwinkel
     \tan(\varphi) = \frac{F_W}{F_A} = \frac{c_W}{c_A} = \frac{v_V}{v_H}
 \]
 
-\section*{Kapitel 7}
-Absolute Temperatur
+\section{W\"armelehre Einf\"uhrung}
+\begin{definition}[Absolute Temperatur]
 \[
     T = \vartheta + \SI{273.15}{\kelvin} = \vartheta - \vartheta_0
 \]
+\end{definition}
 
-Stoffmenge
+\begin{definition}[Stoffmenge]
+Hier \emph{Partikel} steht f\"ur Molek\"ule, Atome oder Ionen.
 \[
-    \SI{1}{\mole} = N_A \text{ Molek\"ule} = \SI{6.022e23}{\per\mole}
+    \SI{1}{\mole} = N_A \text{ Partikeln} = \SI{6.022e23}{\per\mole}
 \]
+Der Avogadro-Zahl \(N_A\) entspricht Anzahl von Partikeln in eine Mole, und 1 Mol ist als der Anzahl von Atome \textsuperscript{12}C in \SI{0.012}{\kilo\gram} definiert worden.
+\end{definition}
 
-Ausdehnung
+\subsection{Fl\"ussgkeiten und Festk\"orpern}
+\begin{definition}[Thermische Ausdehnung]
 \begin{align*}
     \Delta \ell &= \alpha\ell\Delta T \\
     \Delta A &= \beta A \Delta T & \beta \approx 2\alpha \\
     \Delta V &= \gamma V \Delta T & \gamma \approx 3\alpha
 \end{align*}
 
-Termische Spannung
-\[
-    \sigma = E \alpha \Delta T
-\]
+\begin{remark}[Anomalie des Wassers] Bei der Temperatur \SI{4}{\celsius} verschwindet sein Volumenausdehnungskoeffizient. Ebenfalls ungew\"ohnlich ist, dass die Dichte des festen Zustandes kleiner ist als die des fl\"ussigen Zustanges.
+\end{remark}
 
-\section*{Kapitel 8}
-Universelle Gasgleichung f\"ur ideale Gase
+\begin{result}[Termische Spannung]
 \[
-    pV = nRT = N_A k T = \text{ (konstant)}
+    \sigma = E\varepsilon = E\frac{\Delta \ell}{\ell} = E \alpha \Delta T
 \]
-\[
-    \frac{p_1 V_1}{T_1} = \frac{p_2 V_2}{T_2}
-\]
+\end{result}
+\end{definition}
 
-Molzahl
+\section{Ideale Gase}
+\begin{definition}[Universelle Gasgleichung f\"ur ideale Gase]
+\begin{gather*}
+    pV = nRT = N_A k_B T = \text{ (konstant)} \\
+    \text{oder} \quad \frac{p_1 V_1}{T_1} = \frac{p_2 V_2}{T_2}
+\end{gather*}
+\begin{itemize}
+    \item \(R = N_A k_B = \SI{8.313}{\joule\per\mole\per\kelvin}\) ist die Universelle Gaskonstante
+    \item \(k_B = \SI{1.381e-23}{\joule\per\kelvin}\) ist die Boltzmann-Konstante.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Molzahl]
 \[
     n = \frac{m}{M} = \frac{N}{N_A}
 \]
-
-Dichte eines Gases
+wobei \(M\) ist die sogenannte Molmasse in \si{\kilo\gram\per\mole}.
+\begin{result}[Spezifische Gaskonstante \(R_s\)]
 \[
-    \rho = \frac{m}{V} = \frac{M}{V_m} = \frac{pM}{RT}
+    pV = \frac{m}{M} RT = m R_s T
 \]
+\end{result}
+
+\begin{result}[Dichte eines Gases]
+\[
+    \varrho = \frac{m}{V} = \frac{M}{V_m} = \frac{pM}{RT}
+\]
+\end{result}
+\end{definition}
+
 
 \section*{Kapitel 9}
 Gesetz von Dalton
@@ -506,6 +570,10 @@ Van der Waals-Korrektur
     \quad
     V_m' = V_m - b
 \]
+
+\begin{figure}[h] \centering
+    \input{fig/van-der-waals-maxwell-isotherm}
+\end{figure}
 
 Van der Waals-Gleichung
 \[
