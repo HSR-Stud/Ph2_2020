@@ -28,9 +28,12 @@
 
 \usepackage{tikz}
 \usetikzlibrary{calc}
+\usetikzlibrary{patterns}
 
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.15}
+\usepgfplotslibrary{external} 
+\tikzexternalize[prefix=fig/]
 
 \usepackage{xcolor}
 \usepackage[colorlinks = true,
@@ -93,6 +96,8 @@
 \newcommand{\uvec}[1]{\ensuremath{\vec{\hat{#1}}}}
 
 \newcommand{\unitsof}[1]{\ensuremath{\left[\,#1\,\right]}}
+
+\newcommand{\fromlecture}[1]{\textcolor{red!70!black}{\small\texttt{K.#1}}}
 
 
 
@@ -157,7 +162,7 @@ In ruhenden Fluiden \(\tau = 0\), somit ist die Kraft immer senkrecht.
 \]
 \end{definition}
 
-\section{Hydrostatik}
+\section{Hydrostatik \fromlecture{1-2}}
 
 \begin{definition}[Schweredruck]
 \begin{equation} \label{eqn:hydrostatic-pressure}
@@ -278,7 +283,7 @@ Allgemein an die Grenze gilt:
 \end{definition}
 
 \section{Hydrodynamik}
-\subsection{Einf\"uhrung}
+\subsection{Einf\"uhrung \fromlecture{3-4}}
 \begin{definition}[Kontinuit\"atsgleichung]
 \begin{equation} \label{eqn:continuity}
     \pderiv{}{t}\int_V \varrho \di{V} 
@@ -311,6 +316,7 @@ Der Term \(\varrho v^2 / 2\) wird \emph{dynamische Druck} genannt.
     \resizebox{.9\linewidth}{!}{%
         \input{fig/bernoulli}%
     }
+    \caption{Schematische Darstellung f\"ur die Bernoulli Gleichung}
 \end{figure}
 
 \begin{remark}
@@ -333,9 +339,9 @@ Wo die Geschwindigkeit am schnellsten ist, dort ist die Druck am tiefsten.
 
 \end{definition}
 
-\subsection{Reale Str\"omungen}
+\subsection{Reale Str\"omungen \fromlecture{5-6}}
 
-\begin{definition}[Newtonsche Reibungsgesetz]
+\begin{definition}[Newton'sche Reibungsgesetz]
 Die Proportionalit\"atskonstante \(\eta\) wird \emph{dynamische Viskosit\"at} oder \emph{Z\"ahingkeit} genannt.
 \begin{gather*}
     \tau = \eta \deriv{v}{z}
@@ -345,6 +351,18 @@ Die Proportionalit\"atskonstante \(\eta\) wird \emph{dynamische Viskosit\"at} od
     = \si{\newton\second\per\metre}
     = \si{\pascal\second}
 \end{gather*}
+
+\begin{result}[Bernoulli Gleichung bei Newton'scher Reibung]
+\[
+    p_1 + \varrho g h_1 + \frac{\varrho}{2} v_1^2
+    =
+    p_2 + \varrho g h_2 + \frac{\varrho}{2} v_1^2 + p_\text{v}
+\]
+In der Praxis wird der Druckverlust \(p_\text{v}\) oft als Verlusth\"ohe \(h_\text{v}\) angegeben, d.h. diejenige H\"ohe, um die der Zufluss angehoben werden muss, um an Ausfluss aus der Stromr\"ohre denselben Druck wie im reibungsfreien Fall zu erzeugen.
+\[
+    p_\text{v} = \varrho g h_\text{v}  
+\]
+\end{result}
 \end{definition}
 
 \begin{definition}[Formel von Stokes]
@@ -387,17 +405,16 @@ Bei einer Zunahme des Rohrradius wird nicht nur die zur Verf\"ugung stehende Que
 \end{definition}
 
 \begin{definition}[Prandtl'sche Grenzschicht]
-\(h\) ist die h\"ohe der Schicht in unmittelbarer N\"ahe einer Oberfl\"ache \(A = \ell b\) an ein Fluid, der vorbeistr\"omt, mitgezogen wird.
+\(D_\text{l}\) ist die Dicke der Schicht in unmittelbarer N\"ahe einer Oberfl\"ache mit L\"ange \(\ell\) an ein Fluid, der vorbeistr\"omt, der mitgezogen wird. Siehe Abb. \ref{fig:prandtl-boundary}.
 \[
-    h = \frac{\ell}{\sqrt{\mathcal{R}}} =  \sqrt{\frac{\eta\ell}{\varrho v}}
+    D_\text{l} = \frac{\ell}{\sqrt{\mathcal{R}}} =  \sqrt{\frac{\eta\ell}{\varrho v}}
 \]
 \begin{figure}[h] \centering
-\input{fig/prandtl-boundary.tex}
-\caption{Laminare Grenzschicht f\"ur eine Plattenstr\"omung}
+\input{fig/prandtl-boundary}
+\caption{Laminare Grenzschicht f\"ur eine Platte in einem Str\"omungsfeld mit Geschwindigkeit \(v_0\), und \(\ell \gg D_\text{l}\).}
+\label{fig:prandtl-boundary}
 \end{figure}
 \end{definition}
-
-\subsection{Turbulente Str\"omung}
 
 \begin{definition}[Reynolds Zahl]
 Ist ein dimensionslose Koeffizient aus der \emph{Navier-Stokes} Gleichung, der das Verh\"altnis zwischen kinetischer Energie des Fluides und dessen innerer Reibung (proportional zur Viskosit\"at) beschreibt.
@@ -408,7 +425,7 @@ Ist ein dimensionslose Koeffizient aus der \emph{Navier-Stokes} Gleichung, der d
 \(v^*, \ell^*\) sind eine charakteristische L\"ange bzw. Geschwindigkeit. Sie sind dimensionslose Variablen f\"ur geometrische und physikalische Gr\"ossen.
 
 \begin{result}[Rohrstr\"omung]
-Wird bei der Str\"omung durch ein Rohr mit kreisf\"ormigem Querschnitt der Durchmesser \(d\) als charakteristische Abmessung gew\"ahlt, sot ist die Reynolds-Zahl
+Wird bei der Str\"omung durch ein Rohr mit kreisf\"ormigem Querschnitt der Durchmesser \(d\) als charakteristische Abmessung gew\"ahlt, somit ist die Reynolds-Zahl
 \[
     \mathcal{R} = \frac{\varrho v d}{\eta}
 \]
@@ -417,14 +434,26 @@ Wird bei der Str\"omung durch ein Rohr mit kreisf\"ormigem Querschnitt der Durch
 \end{definition}
 
 \begin{definition}[Kritische Reynoldszahl \(\mathcal{R}_k\)]
+\begin{align*}
+    \mathcal{R} > \mathcal{R}_k
+    \quad&\implies\quad\text{Turbulent} \\
+    \mathcal{R} \leq \mathcal{R}_k
+    \quad&\implies\quad\text{Laminar}
+\end{align*}
+
+\begin{result}[Kritische Reynoldszahl f\"ur die Rohrstr\"omung]
+\[
+    \mathcal{R}_k = 2320
+\]
+\end{result}
 
 \end{definition}
 
 \begin{definition}[Reale Rohrstr\"omung]
 Turbulente Rohrst\"omung, je nach turbulent oder laminares \(\lambda\) 
-\[
+\begin{equation} \label{eqn:real-ductstream}
     \Delta p = \lambda \frac{\varrho\ell}{2d} v^2
-\]
+\end{equation}
 
 \begin{example}[Turbulente \(\lambda\) nach Blasius]
 \[
@@ -440,7 +469,7 @@ Das ist tats\"achlich \eqref{eqn:hagen-poiseuille} umformuliert.
 \end{example}
 \end{definition}
 
-\subsection{Dynamischer Auftrieb}
+\subsection{Wiederstandkr\"afte}
 \begin{definition}[Auftriebskraft nach Kutta-Jukowski] Dieser Auftrieb ist eine Folgerung vom \emph{Magnus Effekt}.
 \[
     F_A = \varrho v \ell \Gamma
@@ -459,8 +488,6 @@ Die Zirkulation ist eine makroskopische Gr\"osse und h\"ang vom Weg ab.
     \Gamma = \oint \vec{v} \di{\vec{l}}
 \]
 \end{definition}
-
-\subsection{Tragfl\"ugel}
 
 Induzierter Widerstand
 \[
@@ -510,7 +537,7 @@ Der Avogadro-Zahl \(N_A\) entspricht Anzahl von Partikeln in eine Mole, und 1 Mo
 \end{result}
 \end{definition}
 
-\section{Ideale Gase}
+\subsection{Ideale Gase}
 \begin{definition}[Universelle Gasgleichung f\"ur ideale Gase]
 \begin{gather*}
     pV = nRT = N_A k_B T = \text{ (konstant)} \\
@@ -541,7 +568,7 @@ wobei \(M\) ist die sogenannte Molmasse in \si{\kilo\gram\per\mole}.
 \end{definition}
 
 
-\section*{Kapitel 9}
+\subsection*{Kapitel 9}
 Gesetz von Dalton
 \[
     p = \sum_{i = 1}^n p_i
@@ -568,8 +595,8 @@ Mol-Masse eines Gas-Gemischs
     M = \sum_{i = 1}^n q_i M_i
 \]
 
-\subsection*{Reales Gas}
-Van der Waals-Korrektur
+\subsection{Reales Gas \fromlecture{9}}
+\begin{definition}[Van der Waals-Korrektur]
 \[
     p'V_m' = nRT
     \qquad
@@ -578,23 +605,21 @@ Van der Waals-Korrektur
     V_m' = V_m - b
 \]
 
-\begin{figure}[h] \centering
-    \input{fig/van-der-waals-maxwell-isotherm}
-\end{figure}
-
-Van der Waals-Gleichung
+\begin{result}[Van der Waals-Gleichung]
 \[
     \left(p + \frac{n^2 a}{V^2} \right)(V - nb) = nRT
 \]
+\end{result}
 
-Van der Waals-Parameter
+\begin{result}[Van der Waals-Parameter]
 \[
     a = \frac{9}{8} R T_k V_{mk}
     \qquad
     b = \frac{V_{mk}}{3}
 \]
+\end{result}
 
-Kritische Gr\"ossen
+\begin{result}[Kritische Gr\"ossen]
 \[
     V_{mk} = 3b
     \qquad
@@ -602,8 +627,15 @@ Kritische Gr\"ossen
     \qquad
     p_k = \frac{a}{27b^2}
 \]
+\end{result}
+\end{definition}
 
-\section*{Kapitel 10}
+
+\begin{figure}[h] \centering
+    \input{fig/van-der-waals-maxwell-isotherm}
+\end{figure}
+
+\subsection{Energie \fromlecture{10}}
 \"Anderung innere Energie
 \[
     \Delta U = \Delta W + \Delta Q

@@ -6,18 +6,19 @@
     % tube lines
     \draw[] (0,2) to (1,2) to[out=0, in=180] (4,3) to (5,3);
     \draw[] (0,0) to (1,0) to[out=0, in=180] (4,2) to (5,2);
-    
-    % opening ellipse for A1
+
+    % cylinders
+    %% opening ellipse for A1
     \draw[blue!10, fill=blue!10] (0,.025) rectangle ++(.75,1.95);
     \draw[fill=blue!10] (0,1) ellipse (.3 and 1);
-    % ellipse
+    %% dashed ellipse
     \draw[dashed, fill=blue!10] (.75,1) ellipse (.3 and 1);
-    % closing ellipse
+    %% closing ellipse
     \draw[fill=blue!10] (5,2.5) ellipse (.2 and .5);
-    %% hide half of the ellipse and make dashed
+    %%% hide half of the ellipse and make dashed
     \draw[blue!10, fill=blue!10] (4,2.025) rectangle ++(1,.95); 
     \draw[dashed] (5,2.5) ellipse (.2 and .5);
-    % ellipse for A2
+    %% ellipse for A2
     \draw[dashed, fill=blue!10] (4,2.5) ellipse (.2 and .5);
     
     % vectors

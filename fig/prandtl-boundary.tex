@@ -5,7 +5,8 @@
     \pgfmathsetmacro{\vpos}{2}
     
     % block
-    \draw[fill] (\lpos,0) rectangle ++(\l,-.2);
+    %% needs \usetikzlibrary{patterns}
+    \draw[pattern=north west lines, thick] (\lpos,0) rectangle ++(\l,-.2);
     \draw[<->]  (\lpos,-.4) -- node[midway, below] {\(\ell\)} ++(\l,0);
     
     % boundary line and area
@@ -20,7 +21,7 @@
     
     % height
     \pgfmathsetmacro{\h}{\k*sqrt(\l)}
-    \draw[<->] (\lpos,0) ++(\l,0) -- node[midway, right] {\(h\)} ++(0,\h);
+    \draw[<->] (\lpos,0) ++(\l,0) -- node[midway, right] {\(D_\text{l}\)} ++(0,\h);
         
     % velocity vectors
     \draw[dashed]    (\vpos,0) -- ++(0,2);
