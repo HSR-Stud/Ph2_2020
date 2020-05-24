@@ -95,7 +95,7 @@
 \renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
 \newcommand{\uvec}[1]{\ensuremath{\vec{\hat{#1}}}}
 
-\newcommand{\unitsof}[1]{\ensuremath{\left[\,#1\,\right]}}
+\newcommand{\unitof}[1]{\ensuremath{\left[\,#1\,\right]}}
 
 \newcommand{\fromlecture}[1]{\textcolor{red!70!black}{\small\texttt{K.#1}}}
 
@@ -127,7 +127,7 @@ F\"ur einfache F\"alle der Cauchy Spannugstensor kann zu zwei Skalare \(p\) und 
     = F_\parallel
     \stackrel{\text{statik}}{=} 0
     \\
-    \unitsof{p} &= \si{\newton\per\square\metre} = \si{\pascal} 
+    \unitof{p} &= \si{\newton\per\square\metre} = \si{\pascal} 
 \end{align*}
 
 \begin{result}[Gesetzt von Pascal]
@@ -158,7 +158,7 @@ In ruhenden Fluiden \(\tau = 0\), somit ist die Kraft immer senkrecht.
 
 \begin{definition}[Dichte] Ist die Masse pro Volumeneinheit.
 \[
-    \varrho = \frac{m}{V} \qquad \unitsof{\varrho} = \si{\kilo\gram\per\cubic\metre}
+    \varrho = \frac{m}{V} \qquad \unitof{\varrho} = \si{\kilo\gram\per\cubic\metre}
 \]
 \end{definition}
 
@@ -237,7 +237,7 @@ An der Oberfl\"ache der Fl\"ussigkeit ist der mittlere Abstand der Molek\"ule et
 \[
     \sigma = \frac{F}{\ell}
     \qquad
-    \unitsof{\sigma} = \si{\newton\per\metre}
+    \unitof{\sigma} = \si{\newton\per\metre}
 \]
 \begin{remark}
 Die Oberfl\"achenspannung kann auch als \emph{spezifische Oberf\"achenenergie} bezeichnet werden.
@@ -293,9 +293,10 @@ Allgemein an die Grenze gilt:
 \begin{result}[Ideales Fluid]
 Da die Dichte konstant ist (inkompressibel), man kann \eqref{eqn:continuity} durch \(\varrho\) teilen und folgt:
 \[
-    \dot{V} = \int_A \vec{v}\cdot\di{\vec{s}} = vA
+    \dot{V} = \int_A \vec{v}\cdot\di{\vec{s}} 
+    = vA = \frac{\dot{m}}{\varrho}
     \qquad
-    \unitsof{\dot{V}} = \si{\cubic\metre\per\second}
+    \unitof{\dot{V}} = \si{\cubic\metre\per\second}
 \]
 \end{result}
 
@@ -346,7 +347,7 @@ Die Proportionalit\"atskonstante \(\eta\) wird \emph{dynamische Viskosit\"at} od
 \begin{gather*}
     \tau = \eta \deriv{v}{z}
     \stackrel{!}{=} \frac{F_\parallel}{A}  \\
-    \unitsof{\eta}  
+    \unitof{\eta}  
     = \si{\kilo\gram\per\metre\second}
     = \si{\newton\second\per\metre}
     = \si{\pascal\second}
@@ -549,11 +550,12 @@ Der Avogadro-Zahl \(N_A\) entspricht Anzahl von Partikeln in eine Mole, und 1 Mo
 \end{itemize}
 \end{definition}
 
-\begin{definition}[Molzahl]
+\begin{definition}[Molzahl und Molmasse]
 \[
-    n = \frac{m}{M} = \frac{N}{N_A}
+    nM = m = \frac{N}{N_A} M
 \]
 wobei \(M\) ist die sogenannte Molmasse in \si{\kilo\gram\per\mole}.
+
 \begin{result}[Spezifische Gaskonstante \(R_s\)]
 \[
     pV = \frac{m}{M} RT = m R_s T
@@ -568,32 +570,31 @@ wobei \(M\) ist die sogenannte Molmasse in \si{\kilo\gram\per\mole}.
 \end{definition}
 
 
-\subsection*{Kapitel 9}
-Gesetz von Dalton
+\subsection{Gemissche idealer Gase}
+\begin{definition}[Partialdruck]
+Der Druck \(p_i\) ist der Druck, den die Gaskomponente \(i\) h\"atte, wenn ihr bei der Temperatur \(T\) das ganze Volumen \(V\) zur Verf\"ugung h\"atte.
+\end{definition}
+
+\begin{definition}[Gesetz von Dalton]
+In einem Gasgemisch ist die Summe der Partialdr\"ucke gleich dem Gesamtdruck.
 \[
     p = \sum_{i = 1}^n p_i
 \]
+\end{definition}
 
-Volumen-Konzentration
+\begin{definition}[Volumen- und Massen-Konzentration]
 \[
-    q_i = \frac{V_i}{V}
+    q_i = \frac{V_i}{V} = \frac{n_i}{n}
+    \qquad
+    \mu_i = \frac{m_i}{m} = \frac{M_i}{M} q_i
 \]
-\[
-    q_i = \frac{n_i}{n}
-\]
+\end{definition}
 
-Massen-Konzentration
-\[
-    \mu_i = \frac{m_i}{m}
-\]
-\[
-    \mu_i = \frac{M_i}{M} q_i
-\]
-
-Mol-Masse eines Gas-Gemischs
+\begin{definition}[Mol-Masse eines Gas-Gemischs]
 \[
     M = \sum_{i = 1}^n q_i M_i
 \]
+\end{definition}
 
 \subsection{Reales Gas \fromlecture{9}}
 \begin{definition}[Van der Waals-Korrektur]
@@ -630,41 +631,92 @@ Mol-Masse eines Gas-Gemischs
 \end{result}
 \end{definition}
 
+\begin{definition}[Maxwell-Konstruction] In der Abb. \ref{fig:maxwell-isotherm} der bei der Van der Waals-Gleichung beschrebte Brereich A--D ist unrealistisch. Eigentlich sind dazwischen fl\"ussige und gasf\"ormige Phase mieinander im Gleichgewicht, und die Druck \(p_s\) bleibt konstant.
+\end{definition}
+
 
 \begin{figure}[h] \centering
     \input{fig/van-der-waals-maxwell-isotherm}
+    \caption{Van-Der-Waals Zustandskurven und die Maxwell-Konstruction}
+    \label{fig:maxwell-isotherm}
 \end{figure}
 
-\subsection{Energie \fromlecture{10}}
-\"Anderung innere Energie
+\subsection{Kinetische Gastheorie \fromlecture{10}}
+\begin{definition}[Erster Hauptsatz der Thermodynamik]
+Die innere Energie \(U\) ist die gesamte in einem System enthaltene Energie.
+\begin{align*}
+    \dd{U} &= \delta W + \delta Q &
+    \Delta U &= \Delta W + \Delta Q \\
+    \unitof{U} &= \unitof{E} = \si{\joule}
+\end{align*}
+\begin{remark}
+\(\delta W\) und \(\delta Q\) sind keine Differentiale von Zustandgr\"ossen, da Arbeit und W\"arme sind keine Zustandgr\"ossen, sondern Prozessgr\"ossen.
+\end{remark}
+\begin{result}[Es gibt kein Perpetuum mobile erster Art]
 \[
-    \Delta U = \Delta W + \Delta Q
+    \oint \dd{U} = 0, \text{ aber } \oint \delta W \neq 0 \text{ und } \oint \delta Q \neq 0
 \]
+\end{result}
+\end{definition}
 
-Mechanische Arbeit von einem Gas
+\begin{definition}[Spezifische und molare W\"armekapazit\"at]
+\(C\) ist die W\"armekapazit\"at, \(c = C/m\) hei{\ss}t \emph{spezifische} W\"armekapazit\"at und \(C_m = C/n = Mc\) ist die \emph{molare} W\"armekapazit\"at.
 \[
-    \Delta W = p \Delta V
+    \delta Q \propto \dd{T} \implies \delta Q = C\dd{T} = cm\dd{T} = C_m n\dd{T}
 \]
+\end{definition}
 
-Schmelz-/Erstarrungs-W\"arme
+\begin{definition}[Molare W\"armekapazit\"at von Gasen]
 \[
-    Q_f = q_f m
+    F\dd{s} = pA\dd{s} = p\di{V} \implies \delta W = -p\di{V}
 \]
+\end{definition}
 
-Verdampfungs-/Kondensations-W\"arme
+\subsection{Phasen und Phasen\"uberg\"ange \fromlecture{11}}
+\begin{definition}[Clasius-Clapeyron Gleichungen]
 \[
-    Q_s = q_s m
+    \deriv{p_s}{T} =
+        \frac{q_s}{T\left(\varrho_g^{-1} - \varrho_f^{-1}\right)}
+    \qquad
+    \deriv{p_f}{T} =
+        \frac{q_f}{T\left(\varrho_f^{-1} - \varrho_s^{-1}\right)}
 \]
+\begin{result}[Dampfdruck und Schmelzdruck]
+\begin{gather*}
+    p_s(T) = p_{s_0} \exp\left[
+        \frac{q_s M_w}{R} \left(
+            T_0^{-1} - T^{-1}
+        \right)
+    \right] \\
+    p_f(T) = p_{s_0} \exp\left[
+        \frac{q_f M_w}{R} \left(
+            T_0^{-1} - T^{-1}
+        \right)
+    \right]
+\end{gather*}
+\end{result}
 
-W\"armekapazit\"at
+\begin{result}[Magnus Dampfdruck] Approximiert die L\"osung der Clasius-Clapeyron Differenzialgleichung f\"ur Wasser.
 \[
-    Q = cm\Delta T = n C_m \Delta T = C \Delta T
+    p_s(\vartheta) = p_{s_0}
+        \exp_{10}\left({\frac{7.5\vartheta}{\vartheta + 265.5}}\right)
 \]
+\end{result}
+\end{definition}
 
-W\"arme-Bilanz
+\begin{definition}[Absolute Luftfeuchtigkeit]
 \[
-    0 = \sum_{i = 1}^n \Delta Q_i + \Delta Q_{f_i} + \Delta Q_{s_i}
+    f = \frac{m_w}{V}
 \]
+\end{definition}
+
+\begin{definition}[Relative Luftfeuchtigkeit]
+\[
+    f_r = \frac{m_w}{m_s} = \frac{p_D}{p_s}
+\]
+\end{definition}
+
+
 
 \begin{thebibliography}{2}
 \bibitem{hsr}
@@ -714,3 +766,5 @@ You should have received a copy of the license along with this work. If not, see
 }
 
 \end{document}
+
+% vim: set et sw=4 ts=4 wrap linebreak spell spelllang=de:
