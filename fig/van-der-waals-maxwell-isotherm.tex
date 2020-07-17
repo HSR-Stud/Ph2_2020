@@ -18,12 +18,12 @@
         samples = 200,
         domain = 1:15, 
     ]
-    
+
     \pgfplotsinvokeforeach{0,1,2,...,6}{
         \addplot[gray, variable=\V]
             {(\n*\R*(\T+#1*\dT))/(\V-\n*\b)-(\n^2*\a)/(\V^2)};
     }
-    
+
     \addplot[thick,red]{0};
 \end{axis}
 \end{tikzpicture}

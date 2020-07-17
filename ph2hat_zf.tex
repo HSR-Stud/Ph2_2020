@@ -145,7 +145,10 @@ In ruhenden Fluiden \(\tau = 0\), somit ist die Kraft immer senkrecht.
         &\approx \SI{0.98}{\bar}
     \end{aligned} \\
     Physikalische\newline Atmosph\"are & \SI{1}{\atm} = \SI{101325}{\pascal} \\
-    Torr & \SI{1}{\torr} = \SI{1/760}{\atm} \\
+    Torr & \begin{aligned}
+        \SI{1}{\torr} &= \SI{1/760}{\atm} \\
+        &= \varrho_\text{Hg}\cdot g \cdot \SI{1}{\milli\metre}
+    \end{aligned} \\
     Bar & \begin{aligned}
         \SI{1}{\bar} &= \SI{1e5}{\pascal}\\
         &\approx \SI{750}{\torr}
@@ -541,7 +544,7 @@ Der Avogadro-Zahl \(N_A\) entspricht Anzahl von Partikeln in eine Mole, und 1 Mo
 \subsection{Ideale Gase}
 \begin{definition}[Universelle Gasgleichung f\"ur ideale Gase]
 \begin{gather*}
-    pV = nRT = N_A k_B T = \text{ (konstant)} \\
+    pV = nRT = n N_A k_B T = \text{ (konstant)} \\
     \text{oder} \quad \frac{p_1 V_1}{T_1} = \frac{p_2 V_2}{T_2}
 \end{gather*}
 \begin{itemize}
@@ -673,6 +676,12 @@ Die innere Energie \(U\) ist die gesamte in einem System enthaltene Energie.
 \end{definition}
 
 \subsection{Phasen und Phasen\"uberg\"ange \fromlecture{11}}
+
+\begin{figure}[h]
+    \includegraphics[width=\linewidth]{fig/phase-diagram}%
+    \caption{\tt FIXME}
+\end{figure}
+
 \begin{definition}[Clasius-Clapeyron Gleichungen]
 \[
     \deriv{p_s}{T} =
@@ -704,53 +713,104 @@ Die innere Energie \(U\) ist die gesamte in einem System enthaltene Energie.
 \end{result}
 \end{definition}
 
-\begin{definition}[Absolute Luftfeuchtigkeit]
+\begin{definition}[Taupunkt und Taupunktstemperatur]
+Die Temperatur, bei der beim Abk\"uhlen feuchter Luft S\"attigungs erreicht wird und Kondensation einsetzt, wird \emph{Taupunkt} genannt.
 \[
-    f = \frac{m_w}{V}
+    p_D = p_s (\vartheta_d)
 \]
 \end{definition}
 
-\begin{definition}[Relative Luftfeuchtigkeit]
+\begin{definition}[Luftfeuchtigkeit]
+\(m_w\) ist die Masse des \emph{in der Luft enthaltenen} Wasserdampfes.
+\(m_s\) ist die maximale Dampfmasse im S\"attigungszustand.
+\(P_D\) ist die Partialdruck des Wassedampfes.
+\begin{align*}
+    \text{Absolute} \quad f   &= \frac{m_w}{V}                              & \unitof{f}   & = \unitof{\varrho} \\
+    \text{Relative} \quad f_r &= \frac{m_w}{m_s} = \frac{p_D}{p_s} \leq 1 & \unitof{f_r} & = 1
+\end{align*}
+\end{definition}
+
+\begin{definition}[Dichte des feuchten Luft]
 \[
-    f_r = \frac{m_w}{m_s} = \frac{p_D}{p_s}
+    \varrho_F = \varrho_T + \frac{p_D(M_w - M_L)}{RT}
+        \quad \varrho_F < \varrho_T
 \]
 \end{definition}
 
+\subsection{W\"armetransport \fromlecture{13}}
 
+\begin{definition}[Fourier'sche Gesetz der W\"armeleitung]
+\begin{gather*}
+    j = \frac{\delta Q}{A\di{t}} \propto \deriv{T}{x}
+    \implies
+    j = -\lambda \deriv{T}{x}
+    \\
+    \unitof{j} = \si{\joule\per\square\metre\per\second} = \si{\watt\per\square\metre}
+    \quad
+    \unitof{\lambda} = \si{\watt\per\metre\per\kelvin}
+\end{gather*}
+\end{definition}
+
+
+\subsection{Thermodynamische Prozesse \fromlecture{14}}
+
+\begin{definition}[Isobare Zusand\"anderungen]
+\begin{align*}
+    \delta Q &= nC_{mp} \di{T} & \delta W &= p \di{V}
+\end{align*}
+\end{definition}
+
+\begin{definition}[Isochore Zusand\"anderungen]
+\begin{align*}
+    \delta Q &= nC_{mv} \di{T} & \dd{V} = 0 &\implies \delta W = 0
+\end{align*}
+\end{definition}
+
+\begin{definition}[Isotherme Zusand\"anderungen]
+\begin{align*}
+    \dd{T} &= 0 \implies \delta Q = \delta W \\
+    Q &= W = \int\limits_{V_1}^{V_2} p \di{V}
+    = \int\limits_{V_1}^{V_2} \frac{nRT}{V} \di{V}
+    = nRT\ln\left(\frac{V_2}{V_1}\right)
+\end{align*}
+\end{definition}
+
+\begin{definition}[Adiabatische Zustand\"anderungen]
+\end{definition}
 
 \begin{thebibliography}{2}
 \bibitem{hsr}
-	\textsc{Hochschule f\"ur Technik Rapperswil (HSR)}.
+    \textsc{Hochschule f\"ur Technik Rapperswil (HSR)}.
     \textit{\texttt{Ph2HAT} Vorlesungen und die dazugeh\"orige Unterlagen,}
-	Sourlier David,
-	Fr\"uhlingssemester 2020,
-	Rapperswil.
+    Sourlier David,
+    Fr\"uhlingssemester 2020,
+    Rapperswil.
 
 \bibitem{bucher-ruh}
-	\textsc{Arthur Ruh, Benno Bucher}.
-	\textit{Physik 1: Mechanik, Fluide, W\"armelehre}.
-	Vol I, HSR, 2014, Rapperswil.
+    \textsc{Arthur Ruh, Benno Bucher}.
+    \textit{Physik 1: Mechanik, Fluide, W\"armelehre}.
+    Vol I, HSR, 2014, Rapperswil.
 
 \bibitem{feynman1}
-	\textsc{Richard Feynman}.
-	\textit{Mainly Mechanics, radiation, and heat}.
-	\textit{The Feynman Lectures on Physics},
-	Leighton, Sands,
-	New Millenium Edition,
-	Vol I,
-	Basic Books,
-	California Institute of Technology (Caltech).
+    \textsc{Richard Feynman}.
+    \textit{Mainly Mechanics, radiation, and heat}.
+    \textit{The Feynman Lectures on Physics},
+    Leighton, Sands,
+    New Millenium Edition,
+    Vol I,
+    Basic Books,
+    California Institute of Technology (Caltech).
 
 \bibitem{feynman2}
-	\textsc{Richard Feynman}.
-	\textit{Mainly electromagnetism and matter}.
-	\textit{The Feynman Lectures on Physics},
-	Leighton, Sands,
-	New Millenium Edition,
-	Vol II,
-	Basic Books,
-	California Institute of Technology (Caltech).
-	
+    \textsc{Richard Feynman}.
+    \textit{Mainly electromagnetism and matter}.
+    \textit{The Feynman Lectures on Physics},
+    Leighton, Sands,
+    New Millenium Edition,
+    Vol II,
+    Basic Books,
+    California Institute of Technology (Caltech).
+
 \end{thebibliography}
 
 
