@@ -54,7 +54,7 @@
     {}% headfont
     { }% headpunkt
     { }% headspace
-    {\textsc{\thmname{#1} \thmnumber{#2}.} \textbf{\thmnote{#3}}}% headspec
+    {\textbf{\thmname{#1} \thmnumber{#2}.} \textsc{\thmnote{#3}}}% headspec
 
 \newtheoremstyle{hsr-sub}%
     {1em}% above
@@ -64,17 +64,7 @@
     {}% headfont
     { }% headpunkt
     { }% headspace
-    {\textsl{\thmname{#1} \thmnumber{#2}.} \textbf{\thmnote{#3}}}% headspec
-    
-\newtheoremstyle{hsr-unnum}%
-    {1em}% above
-    {1em}% below
-    {}% body
-    {0pt}% indent
-    {}% headfont
-    { }% headpunkt
-    { }% headspace
-    {\textsc{\thmname{#1}} \textbf{\thmnote{#3}}}% headspec
+    {\textbf{\thmname{#1} \thmnumber{#2}.} \textsc{\thmnote{#3}}}}% headspec
 
 \theoremstyle{hsr-def}
 \newtheorem{definition}{Definition}[section]
@@ -82,8 +72,6 @@
 \theoremstyle{hsr-sub}
 \newtheorem{result}{Folgerung}[definition]
 \newtheorem{example}{Beispiel}[definition]
-
-% \theoremstyle{hsr-unnum}
 \newtheorem{remark}{Bemerkung}[definition]
 
 
@@ -316,6 +304,7 @@ Der Term \(\varrho v^2 / 2\) wird \emph{dynamische Druck} genannt.
     p + \varrho g h + \frac{\varrho}{2} v^2 = (\text{Konstant})
 \]
 
+% TODO: Dyn. Druck + Stat. Druck = Staudruck zeigen: Buch p. 211 Abb. 9.6
 \begin{figure}[h] \centering
     \resizebox{.9\linewidth}{!}{%
         \input{fig/bernoulli}%
@@ -493,20 +482,23 @@ Die Zirkulation ist eine makroskopische Gr\"osse und h\"ang vom Weg ab.
 \]
 \end{definition}
 
-Induzierter Widerstand
+\begin{definition}[Induzierter Widerstand]
 \[
     F_W = c_W^* \frac{\varrho}{2} v^2 A_\parallel
 \]
+\end{definition}
 
-Dynamischer Auftrieb
+\begin{definition}[Dynamischer Auftrieb]
 \[
     F_A = c_A \frac{\varrho}{2} v^2 A_\perp
 \]
+\end{definition}
 
-Gleitwinkel
+\begin{definition}[Gleitwinkel]
 \[
     \tan(\varphi) = \frac{F_W}{F_A} = \frac{c_W}{c_A} = \frac{v_V}{v_H}
 \]
+\end{definition}
 
 \section{W\"armelehre Einf\"uhrung}
 \begin{definition}[Absolute Temperatur]
@@ -601,13 +593,10 @@ In einem Gasgemisch ist die Summe der Partialdr\"ucke gleich dem Gesamtdruck.
 
 \subsection{Reales Gas \fromlecture{9}}
 \begin{definition}[Van der Waals-Korrektur]
-\[
-    p'V_m' = nRT
-    \qquad
-    p' = p + \frac{a}{V_m^2}
-    \quad
-    V_m' = V_m - b
-\]
+\begin{align*}
+    p'V_m' & = RT      & p' & = p + \frac{a}{V_m^2} \\
+    V_m'   & = V_m - b & V  & = nV_m
+\end{align*}
 
 \begin{result}[Van der Waals-Gleichung]
 \[
@@ -662,11 +651,19 @@ Die innere Energie \(U\) ist die gesamte in einem System enthaltene Energie.
 \end{result}
 \end{definition}
 
-\begin{definition}[Spezifische und molare W\"armekapazit\"at]
-\(C\) ist die W\"armekapazit\"at, \(c = C/m\) hei{\ss}t \emph{spezifische} W\"armekapazit\"at und \(C_m = C/n = Mc\) ist die \emph{molare} W\"armekapazit\"at.
+\begin{definition}[W\"armekapazit\"at]
 \[
     \delta Q \propto \dd{T} \implies \delta Q = C\dd{T} = cm\dd{T} = C_m n\dd{T}
 \]
+\begin{table}[H] \centering
+    \begin{tabular}{>{\(}l<{\)} r}
+        \toprule
+        C              & W\"armekapazit\"at \\
+        c = C/m        & \emph{spezifische} W\"armekapazit\"at \\
+        C_m = C_n = Mc & \emph{molare} W\"armekapazit\"at \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 \end{definition}
 
 \begin{definition}[Molare W\"armekapazit\"at von Gasen]
@@ -684,11 +681,11 @@ Die innere Energie \(U\) ist die gesamte in einem System enthaltene Energie.
 
 \begin{definition}[Clasius-Clapeyron Gleichungen]
 \[
-    \deriv{p_s}{T} =
-        \frac{q_s}{T\left(\varrho_g^{-1} - \varrho_f^{-1}\right)}
+    \deriv{p_\text{s}}{T} =
+        \frac{q_\text{s}}{T\left(\varrho_g^{-1} - \varrho_f^{-1}\right)}
     \qquad
-    \deriv{p_f}{T} =
-        \frac{q_f}{T\left(\varrho_f^{-1} - \varrho_s^{-1}\right)}
+    \deriv{p_\text{f}}{T} =
+        \frac{q_\text{f}}{T\left(\varrho_f^{-1} - \varrho_s^{-1}\right)}
 \]
 \begin{result}[Dampfdruck und Schmelzdruck]
 \begin{gather*}
@@ -754,28 +751,55 @@ Die Temperatur, bei der beim Abk\"uhlen feuchter Luft S\"attigungs erreicht wird
 
 \subsection{Thermodynamische Prozesse \fromlecture{14}}
 
-\begin{definition}[Isobare Zusand\"anderungen]
+\subsection{Zustand\"anderungen}
+
+\begin{definition}[Isobare]
+\(
+    p = \left(\text{konstant}\right)
+\), folgt:
 \begin{align*}
-    \delta Q &= nC_{mp} \di{T} & \delta W &= p \di{V}
+    \delta Q &= nC_{mp} \di{T} &
+    \delta W &= p \di{V}
+    \\
+     Q &= nC_{mp} \Delta T &
+     W &= p\Delta V = nR \Delta T
 \end{align*}
 \end{definition}
 
-\begin{definition}[Isochore Zusand\"anderungen]
+\begin{definition}[Isochore]
+\(
+    V = \left(\text{konstant}\right) \iff \dd{V} = 0
+\), folgt:
 \begin{align*}
-    \delta Q &= nC_{mv} \di{T} & \dd{V} = 0 &\implies \delta W = 0
+    \delta Q &= nC_{mv} \di{T} &
+    \delta W &= p \di{V} = 0
+    \\
+     Q &= nC_{mv} \Delta T &
+     W &= 0
 \end{align*}
 \end{definition}
 
-\begin{definition}[Isotherme Zusand\"anderungen]
+\begin{definition}[Isotherme]
+\(
+    T = \left(\text{konstant}\right) \iff \dd{T} = 0
+\), folgt:
 \begin{align*}
-    \dd{T} &= 0 \implies \delta Q = \delta W \\
-    Q &= W = \int\limits_{V_1}^{V_2} p \di{V}
+    \delta Q &= nC_{mv} \di{T} = 0 & 
+    \delta W &= p \di{V}
+    \\
+     Q &= 0 &
+     W &= nRT\ln\left(\frac{V_2}{V_1}\right)
+\end{align*}
+Weil:
+\(\displaystyle
+    W = \int \delta W 
+    = \int\limits_{V_1}^{V_2} p \di{V}
     = \int\limits_{V_1}^{V_2} \frac{nRT}{V} \di{V}
-    = nRT\ln\left(\frac{V_2}{V_1}\right)
-\end{align*}
+\)
 \end{definition}
 
-\begin{definition}[Adiabatische Zustand\"anderungen]
+\begin{definition}[Adiabatische Zustand\"anderungen] D.h. \emph{kein} W\"armeaustauch zwischen dem betrachteten System und seiner Umgebung stattfindet.
+
 \end{definition}
 
 \begin{thebibliography}{2}
